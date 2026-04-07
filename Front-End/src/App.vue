@@ -1,5 +1,8 @@
 <script setup>
 import { ref, reactive } from 'vue'
+import ExpansionPanel from './components/base/ExpansionPanel.vue'
+import CadastralDataSection from './components/form/sections/CadastralDataSection.vue'
+import FamilyMembersSection from './components/form/sections/FamilyMembersSection.vue'
 
 const form = reactive({
   cadastralData: {
@@ -214,143 +217,33 @@ const socialIssuesOptions = [
       </div>
 
       <div class="form-container">
-        <!-- Panels de seções -->
-        <div class="expansion-panel" :class="{ expanded: expandedPanel === 0 }">
-          <button class="panel-header" @click="expandPanel(0)">
-            <h3>📋 Dados Cadastrais</h3>
-          </button>
-          <div v-show="expandedPanel === 0" class="panel-content">
-            <div class="form-row">
-              <div class="form-group">
-                <label>Nome Completo do Solicitante *</label>
-                <input v-model="form.cadastralData.applicantName" type="text" required />
-              </div>
-              <div class="form-group half-width">
-                <label>CPF *</label>
-                <input v-model="form.cadastralData.cpf" type="text" required />
-              </div>
-              <div class="form-group half-width">
-                <label>RG</label>
-                <input v-model="form.cadastralData.rg" type="text" />
-              </div>
-            </div>
+        <!-- Painéis de seções componentizados -->
+        <ExpansionPanel
+          title="Dados Cadastrais"
+          icon="📋"
+          :is-expanded="expandedPanel === 0"
+          @toggle="expandPanel(0)"
+        >
+          <CadastralDataSection
+            :cadastral-data="form.cadastralData"
+            :marital-status-options="maritalStatusOptions"
+          />
+        </ExpansionPanel>
 
-            <div class="form-row">
-              <div class="form-group third-width">
-                <label>Data de Nascimento *</label>
-                <input v-model="form.cadastralData.birthDate" type="date" required />
-              </div>
-              <div class="form-group third-width">
-                <label>Estado Civil</label>
-                <select v-model="form.cadastralData.maritalStatus">
-                  <option value="">Selecione</option>
-                  <option v-for="opt in maritalStatusOptions" :key="opt" :value="opt">{{ opt }}</option>
-                </select>
-              </div>
-              <div class="form-group third-width">
-                <label>Quantidade de Membros na Família</label>
-                <input v-model.number="form.cadastralData.familyMembersCount" type="number" min="1" />
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group">
-                <label>Endereço *</label>
-                <input v-model="form.cadastralData.address" type="text" required />
-              </div>
-              <div class="form-group small-width">
-                <label>Número</label>
-                <input v-model="form.cadastralData.number" type="text" />
-              </div>
-              <div class="form-group">
-                <label>Bairro *</label>
-                <input v-model="form.cadastralData.neighborhood" type="text" required />
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group half-width">
-                <label>Cidade *</label>
-                <input v-model="form.cadastralData.city" type="text" required />
-              </div>
-              <div class="form-group small-width">
-                <label>UF *</label>
-                <select v-model="form.cadastralData.state" required>
-                  <option value="">Selecione</option>
-                  <option value="GO">Goiás</option>
-                  <option value="DF">Distrito Federal</option>
-                  <option value="MG">Minas Gerais</option>
-                  <option value="SP">São Paulo</option>
-                </select>
-              </div>
-              <div class="form-group half-width">
-                <label>CEP</label>
-                <input v-model="form.cadastralData.cep" type="text" />
-              </div>
-            </div>
-
-            <div class="form-row">
-              <div class="form-group half-width">
-                <label>Telefone *</label>
-                <input v-model="form.cadastralData.phone" type="text" required />
-              </div>
-              <div class="form-group half-width">
-                <label>E-mail</label>
-                <input v-model="form.cadastralData.email" type="email" />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="expansion-panel" :class="{ expanded: expandedPanel === 1 }">
-          <button class="panel-header" @click="expandPanel(1)">
-            <h3>👨‍👩‍👧‍👦 Membros da Família</h3>
-          </button>
-          <div v-show="expandedPanel === 1" class="panel-content">
-            <div v-for="(member, index) in form.familyMembers" :key="index" class="family-member">
-              <div class="member-header">
-                <h4>Membro {{ index + 1 }}</h4>
-                <button type="button" class="btn-delete" @click="removeFamilyMember(index)">✕</button>
-              </div>
-              
-              <div class="form-row">
-                <div class="form-group">
-                  <label>Nome *</label>
-                  <input v-model="member.name" type="text" required />
-                </div>
-                <div class="form-group third-width">
-                  <label>Idade *</label>
-                  <input v-model.number="member.age" type="number" min="0" required />
-                </div>
-                <div class="form-group">
-                  <label>Parentesco *</label>
-                  <select v-model="member.relationship" required>
-                    <option value="">Selecione</option>
-                    <option v-for="opt in relationshipOptions" :key="opt" :value="opt">{{ opt }}</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="form-row">
-                <div class="form-group half-width">
-                  <label>Ocupação</label>
-                  <input v-model="member.occupation" type="text" />
-                </div>
-                <div class="form-group half-width">
-                  <label>Escolaridade</label>
-                  <select v-model="member.schooling">
-                    <option value="">Selecione</option>
-                    <option v-for="opt in schoolingOptions" :key="opt" :value="opt">{{ opt }}</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <button type="button" class="btn btn-secondary" @click="addFamilyMember">
-              ➕ Adicionar Membro
-            </button>
-          </div>
-        </div>
+        <ExpansionPanel
+          title="Membros da Família"
+          icon="👨‍👩‍👧‍👦"
+          :is-expanded="expandedPanel === 1"
+          @toggle="expandPanel(1)"
+        >
+          <FamilyMembersSection
+            :family-members="form.familyMembers"
+            :relationship-options="relationshipOptions"
+            :schooling-options="schoolingOptions"
+            @add="addFamilyMember"
+            @remove="removeFamilyMember"
+          />
+        </ExpansionPanel>
 
         <div class="expansion-panel" :class="{ expanded: expandedPanel === 2 }">
           <button class="panel-header" @click="expandPanel(2)">
