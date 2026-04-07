@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/src/" />
+  <Folder Name="/src/Api/">
+    <Project Path="src/Api/CadastroFamilias.Api/CadastroFamilias.Api.csproj" />
+  </Folder>
+  <Folder Name="/src/Application/">
+    <Project Path="src/Application/CadastroFamilias.Application/CadastroFamilias.Application.csproj" />
+  </Folder>
+  <Folder Name="/src/Core/">
+    <Project Path="src/Core/CadastroFamilias.Core/CadastroFamilias.Core.csproj" />
+  </Folder>
+  <Folder Name="/src/Infrastructure/">
+    <Project Path="src/Infrastructure/CadastroFamilias.Infrastructure/CadastroFamilias.Infrastructure.csproj" />
+  </Folder>
+</Solution>

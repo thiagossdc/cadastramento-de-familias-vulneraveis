@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "dgSpecHash": "NmXwggJEho8=",
+  "success": true,
+  "projectFilePath": "/Users/thiagodecarvalho/cadastro-familias/src/Application/CadastroFamilias.Application/CadastroFamilias.Application.csproj",
+  "expectedPackageFiles": [
+    "/Users/thiagodecarvalho/.nuget/packages/fluentvalidation/12.1.1/fluentvalidation.12.1.1.nupkg.sha512",
+    "/Users/thiagodecarvalho/.nuget/packages/masstransit.abstractions/9.1.0/masstransit.abstractions.9.1.0.nupkg.sha512",
+    "/Users/thiagodecarvalho/.nuget/packages/mediatr/14.1.0/mediatr.14.1.0.nupkg.sha512",
+    "/Users/thiagodecarvalho/.nuget/packages/mediatr.contracts/2.0.1/mediatr.contracts.2.0.1.nupkg.sha512",
+    "/Users/thiagodecarvalho/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/10.0.0/microsoft.extensions.dependencyinjection.abstractions.10.0.0.nupkg.sha512",
+    "/Users/thiagodecarvalho/.nuget/packages/microsoft.extensions.logging.abstractions/10.0.0/microsoft.extensions.logging.abstractions.10.0.0.nupkg.sha512",
+    "/Users/thiagodecarvalho/.nuget/packages/microsoft.identitymodel.abstractions/8.14.0/microsoft.identitymodel.abstractions.8.14.0.nupkg.sha512",
+    "/Users/thiagodecarvalho/.nuget/packages/microsoft.identitymodel.jsonwebtokens/8.14.0/microsoft.identitymodel.jsonwebtokens.8.14.0.nupkg.sha512",
+    "/Users/thiagodecarvalho/.nuget/packages/microsoft.identitymodel.logging/8.14.0/microsoft.identitymodel.logging.8.14.0.nupkg.sha512",
+    "/Users/thiagodecarvalho/.nuget/packages/microsoft.identitymodel.tokens/8.14.0/microsoft.identitymodel.tokens.8.14.0.nupkg.sha512"
+  ],
+  "logs": []
+}
