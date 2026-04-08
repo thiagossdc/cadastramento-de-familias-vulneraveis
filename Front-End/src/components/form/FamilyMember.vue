@@ -15,6 +15,10 @@ const props = defineProps({
   schoolingOptions: {
     type: Array,
     required: true
+  },
+  canRemove: {
+    type: Boolean,
+    default: true
   }
 })
 
@@ -25,21 +29,26 @@ defineEmits(['remove'])
   <div class="family-member">
     <div class="member-header">
       <h4>Membro {{ index + 1 }}</h4>
-      <button type="button" class="btn-delete" @click="$emit('remove', index)">✕</button>
+      <button 
+        v-if="canRemove" 
+        type="button" 
+        class="btn-delete" 
+        @click="$emit('remove', index)"
+      >✕</button>
     </div>
     
     <div class="form-row">
-      <div class="form-group">
+      <div class="form-group" :class="{ error: !member.name && member.touched }">
         <label>Nome *</label>
-        <input v-model="member.name" type="text" required />
+        <input v-model="member.name" type="text" required @blur="member.touched = true" />
       </div>
-      <div class="form-group third-width">
+      <div class="form-group third-width" :class="{ error: (!member.age && member.age !== 0) && member.touched }">
         <label>Idade *</label>
-        <input v-model.number="member.age" type="number" min="0" required />
+        <input v-model.number="member.age" type="number" min="0" required @blur="member.touched = true" />
       </div>
-      <div class="form-group">
+      <div class="form-group" :class="{ error: !member.relationship && member.touched }">
         <label>Parentesco *</label>
-        <select v-model="member.relationship" required>
+        <select v-model="member.relationship" required @blur="member.touched = true">
           <option value="">Selecione</option>
           <option v-for="opt in relationshipOptions" :key="opt" :value="opt">{{ opt }}</option>
         </select>
@@ -147,5 +156,14 @@ defineEmits(['remove'])
   outline: none;
   border-color: #667eea;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.form-group.error input,
+.form-group.error select {
+  border-color: #ef4444;
+}
+
+.form-group.error label {
+  color: #ef4444;
 }
 </style>

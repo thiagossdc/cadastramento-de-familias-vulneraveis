@@ -21,6 +21,7 @@ defineEmits(['toggle'])
   <div class="expansion-panel" :class="{ expanded: isExpanded }">
     <button class="panel-header" @click="$emit('toggle')">
       <h3>{{ icon }} {{ title }}</h3>
+      <span class="arrow-icon" :class="{ rotated: isExpanded }">▼</span>
     </button>
     <div v-show="isExpanded" class="panel-content">
       <slot />
@@ -55,6 +56,16 @@ defineEmits(['toggle'])
   font-size: 1.1rem;
   font-weight: 600;
   margin: 0;
+}
+
+.arrow-icon {
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+  color: #6b7280;
+}
+
+.arrow-icon.rotated {
+  transform: rotate(180deg);
 }
 
 .panel-content {

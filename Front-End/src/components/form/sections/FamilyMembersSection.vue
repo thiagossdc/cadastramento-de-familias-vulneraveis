@@ -28,6 +28,7 @@ defineEmits(['add', 'remove'])
       :index="index"
       :relationship-options="relationshipOptions"
       :schooling-options="schoolingOptions"
+      :can-remove="familyMembers.length > 1"
       @remove="$emit('remove', index)"
     />
 
